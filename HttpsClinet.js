@@ -14,10 +14,15 @@ function getAndPrintHTMLChunks () {
 
   /* Add your code here */
   https.get(requestOptions, function (response) {
+    let body = [];
     response.setEncoding('utf8');
-    response.on('data', function(data) {
-      console.log("Data Chunk", data);
+    response.on('data', function(chunk) {
+      body.push(chunk);
+      console.log(`Data Chunk, ${chunk} \n`);
     });
+    response.on('end', function() {
+      console.log("### Response stream complete. ### ")
+    })
   });
 
 }
