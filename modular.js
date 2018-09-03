@@ -1,32 +1,36 @@
-
 var https = require('https');
 
+function getAndPrintHTMLChunks (options) {
 
-function getAndPrintHTMLChunks () {
-
-  var requestOptions = {
-    host: 'sytantris.github.io',
-    path: '/http-examples/step2.html'
-  };
 
   /* Add your code here */
-  https.get(requestOptions, function (response) {
-      let body = "";
+  https.get(options, function (response) {
+    // let body = [];
     response.setEncoding('utf8');
     response.on('data', function(chunk) {
-       body+=(chunk);
-      console.log(body);
-      console.log(chunk)
+      // body.push(chunk);
+      console.log(`Data Chunk, ${chunk} \n`);
     });
     response.on('end', function() {
       console.log("### Response stream complete. ### ")
     })
-    console.log(body);
   });
 
 }
 
-getAndPrintHTMLChunks();
+var options = {
+  host:'sytantris.github.io',
+  path:'/http-examples/step3.html'
+};
+
+
+var requestOptions = {
+  host: 'sytantris.github.io',
+  path: '/http-examples/step3.html'
+};
+
+
+getAndPrintHTMLChunks(options);
 
 
 /*request is not a function it is just a get or post etc.
